@@ -1,0 +1,67 @@
+getgenv().autoupgrade = true
+getgenv().autoskip = true
+getgenv().autotp = true
+
+spawn(function()
+  if game.PlaceId == 4739557376 then
+local args = {[1] = "Solo",[2] = "Invite"}
+game:GetService("ReplicatedStorage").Events.StartServer:InvokeServer(unpack(args))
+   wait(0.5)
+   local args = {[1] = "GrassyIsland"}
+game:GetService("ReplicatedStorage").Events.UpdateMap:InvokeServer(unpack(args))
+     wait(0.2)
+     game:GetService("ReplicatedStorage").Events.StartGame:InvokeServer()
+  end
+  end)
+spawn(function()
+    if game.PlaceId == 5527929546 then
+        local args = {[1] = "Easy"}
+game:GetService("ReplicatedStorage").Events.VoteGamemode:FireServer(unpack(args))
+wait(0.2)
+    game:GetService("ReplicatedStorage").Events.EndVote:FireServer()
+wait()
+local args = {[1] = "Conscript",[2] = Vector3.new(-57.463287353516, 38.687480926514, 47.527172088623),[3] = -180}
+game:GetService("ReplicatedStorage").Events.PlaceTower:InvokeServer(unpack(args))
+    end
+end)
+
+  spawn(function()
+      while autoskip == true do 
+        local args = {[1] = true}
+game:GetService("ReplicatedStorage").Events.VoteSkip:FireServer(unpack(args))
+         wait(5)
+      end
+      end)
+  
+  spawn(function()
+      while autotp == true do
+          game:GetService("ReplicatedStorage").Events.Teleport:InvokeServer()
+         wait(5)
+      end
+  end)
+  spawn(function()
+      if autoupgrade == true then 
+      while wait(5) do
+         local args = {
+    [1] = workspace.Game.Towers.Conscript,
+    [2] = 1
+}
+
+game:GetService("ReplicatedStorage").Events.UpgradeTower:InvokeServer(unpack(args))
+
+    end  
+      end
+  end)
+  spawn(function()
+      if autoupgrade == true then 
+      while wait(1) do
+         local args = {
+    [1] = workspace.Game.Towers.Conscript,
+    [2] = 2
+}
+
+game:GetService("ReplicatedStorage").Events.UpgradeTower:InvokeServer(unpack(args))
+
+    end  
+      end
+  end)
